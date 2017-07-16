@@ -10,22 +10,30 @@
     <style>
     table, th, td {
     border: 1px solid black;
+    /*min-width: 100px;  */
 }
+  #map {
+        height: 600px;
+        width: 400px
+      }
     </style>
     
+  
     
+    
+  
   </head>
   <body>
   
     <h1>Bucket List</h1>
     
        <h3>Input list item here: </h3>
-    <form action="name.do" method="GET">
+    <form action="name.do" method="POST">
       <table>
     <tr>
-        <th>What</th>
-        <th>Where</th>
-        <th>When</th>
+        <th>Object to interact with</th>
+        <th>Location</th>
+        <th>Time frame</th>
     </tr>
 	<tr>
 		<td><input type="text" name="what"/></td> 
@@ -38,32 +46,43 @@
       
       
       
-      <br /><input type="submit" value="Submit" name="submit" /><br />
-    </form>
+      <input type="submit" value="Submit" name="submit" />
+      </form><br>
+      
+    <form action="delete.do" method="POST">
     
       
    <c:if test="${bucketList != null}">
    <table style="border:1px solid">
     <tr>
-    <th></th>
-        <th>What</th>
-        <th>Where</th>
-        <th>When</th>
+    	
+        <th>Object to interact with</th>
+        <th>Location</th>
+        <th>Time frame</th>
+        <th>Delete</th>
     </tr>
 	<c:forEach items="${bucketList}" var="item">
 	<tr>
-		<td><input type="checkbox" name="check" /><td>${item.what}</td> <td>${item.where}</td> <td>${item.when}</td><br>
-
+		
+		<td>${item.what}</td> 
+		<td>${item.where}</td> 
+		<td>${item.when}</td>
+		<td><input type="checkbox" name="checkDelete" value="${item.what}" />
+		
 	        </tr>
     </c:forEach>
     
 </table>
-<br /><input type="submit" value="Delete" name="delete" /><br />
+<input type="submit" value="Delete" name="delete" />
 	</c:if>
-  
-    <br>
-  
-    <br>
+  </form>
+  <c:if test="${removed != null}">
+  <p><strong>The Bucket List item: </strong>"${removed}"<strong> was removed.</strong></p>
+ </c:if>
+ 
+ 
+ 
+ 
  
   </body>
 </html>

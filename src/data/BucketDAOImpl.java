@@ -4,8 +4,11 @@
 package data;
 
 import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,6 +68,9 @@ public class BucketDAOImpl implements BucketDAO {
 	@Override
 	public void addBucketItem(String what, String where, String when) {
 		bucketList.add(new bucketItem(what, where, when));
+		persistThing(bucketList);
+		
+		
 
 	}
 
@@ -72,8 +78,19 @@ public class BucketDAOImpl implements BucketDAO {
 	 * @see data.BucketDAO#deletebucketItem(int)
 	 */
 	@Override
-	public String deletebucketItem(int id) {
-		return bucketList.remove(id).toString() + " has been removed";	
+	public String deletebucketItem(String what) {
+		bucketItem b = null;
+		for (bucketItem bucketItem : bucketList) {
+			if(bucketItem.getWhat().equals(what)){
+				b = bucketItem;
+				break;
+			}
+		}
+		int index = bucketList.indexOf(b);
+		String removed = bucketList.remove(index).toString() + " has been removed";
+		persistThing(bucketList);
+		removed = "What: " + b.getWhat() + ", Where: " + b.getWhere() + ", When: " + b.getWhen();
+		return removed;
 	}
 
 
@@ -107,5 +124,37 @@ public class BucketDAOImpl implements BucketDAO {
 //	}
 //	
 	
+	 @Override
+	    public void persistThing(List<bucketItem> b) {
+	        String orderFile = "WEB-INF/bucket.csv";
+	        String filePath = wac.getServletContext().getRealPath(orderFile);
+	        System.out.println(filePath);
+	        try {
+	            PrintWriter out = new PrintWriter(new FileWriter(filePath));
+	            	for (bucketItem bucketItem : b) {
+						out.println(bucketItem.getWhat() + ", " + bucketItem.getWhere() + ", " + bucketItem.getWhen());
+					}
+	            	out.close();
+	        }
+	        catch (IOException ioe) {
+				ioe.getMessage();
+			}
+	 }
 
+
+	/* (non-Javadoc)
+	 * @see data.BucketDAO#persistThing()
+	 */
+	@Override
+	public void persistThing() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public static void main(String[] args) {
+		System.out.println("This is a test");
+	}
+
+
+	
 }

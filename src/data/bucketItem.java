@@ -11,9 +11,6 @@ public class bucketItem {
 	private String what;
 	private String where;
 	private String when;
-	public String getWhat() {
-		return what;
-	}
 	
 	
 	public bucketItem(String what, String where, String when) {
@@ -22,7 +19,9 @@ public class bucketItem {
 		this.where = where;
 		this.when = when;
 	}
-
+	public String getWhat() {
+		return what;
+	}
 
 	public void setWhat(String what) {
 		this.what = what;
