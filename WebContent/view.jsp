@@ -16,12 +16,10 @@
         height: 600px;
         width: 400px
       }
+      
     </style>
+ 
     
-  
-    
-    
-  
   </head>
   <body>
   
@@ -65,7 +63,7 @@
 	<tr>
 		
 		<td>${item.what}</td> 
-		<td>${item.where}</td> 
+		<td><a href="getLocation.do?place=${item.where}">${item.where}</a></td> 
 		<td>${item.when}</td>
 		<td><input type="checkbox" name="checkDelete" value="${item.what}" />
 		
@@ -81,7 +79,38 @@
  </c:if>
  
  
- 
+   <div id="map"></div>
+    <script>
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 8,
+          center: {lat: -34.397, lng: 150.644}
+        });
+        var geocoder = new google.maps.Geocoder();
+
+        document.getElementById('submit').addEventListener('click', function() {
+          geocodeAddress(geocoder, map);
+        });
+      }
+
+      function geocodeAddress(geocoder, resultsMap) {
+        var address = document.getElementById('${place}').value;
+        geocoder.geocode({'${place}': address}, function(results, status) {
+          if (status === 'OK') {
+            resultsMap.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+              map: resultsMap,
+              position: results[0].geometry.location
+            });
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASJj0SjYy3dfJWAm53SUPlIlqOXclJEWk&callback=initMap">
+    </script>
  
  
   </body>

@@ -54,5 +54,18 @@ public class MVCFileCRUDController {
 		return mv;
 		
 	}
+	
+	
+	@RequestMapping(path = "getLocation.do", params = "place", method = RequestMethod.GET)
+	public ModelAndView showMap(@RequestParam("place") String place, RedirectAttributes redir) {
+		System.out.println(place);
+
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect:view.do");
+		redir.addFlashAttribute("bucketList", bucketDAO.getBucket());
+		redir.addFlashAttribute("place", place);
+		return mv;
+		
+	}
 
 }
