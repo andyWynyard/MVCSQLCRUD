@@ -7,6 +7,7 @@
   <head>
     <meta charset="UTF-8">
     <title>View</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <style>
     table, th, td {
     border: 1px solid black;
@@ -37,13 +38,10 @@
 		<td><input type="text" name="what"/></td> 
 		<td><input type="text" name="where"/></td> 
 		<td><input type="text" name="when"/></td>
-		
 
 	</tr>
 </table>
-      
-      
-      
+  
       <input type="submit" value="Submit" name="submit" />
       </form><br>
       
@@ -63,7 +61,7 @@
 	<tr>
 		
 		<td>${item.what}</td> 
-		<td><a href="getLocation.do?place=${item.where}">${item.where}</a></td> 
+		<td><a class="submit" id="${item.where}" href="#">${item.where}</a></td> 
 		<td>${item.when}</td>
 		<td><input type="checkbox" name="checkDelete" value="${item.what}" />
 		
@@ -79,23 +77,39 @@
  </c:if>
  
  
-   <div id="map"></div>
+<!--    <div id="map"></div> -->
     <script>
     function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 8,
-          center: {lat: -34.397, lng: 150.644}
+          zoom: 5,
+          center: {lat: -38.6897432, lng: 175.9049279}
         });
         var geocoder = new google.maps.Geocoder();
-
-        document.getElementById('submit').addEventListener('click', function() {
-          geocodeAddress(geocoder, map);
-        });
+        var classname = document.getElementsByClassName('submit');
+        for (var i = 0; i < classname.length; i++) {
+            classname[i].addEventListener('click', function(e) {
+            	
+            
+      	console.log($(e.target).text());
+                geocodeAddress(geocoder, map, $(e.target).text());
+            }, false);
+        }
+        
+        
+        document.getElementById('search').addEventListener('click', function() {
+        	
+            
+        	  var searchAddress = document.getElementById('searchAddress').value;
+        	  console.log(searchAddress);
+                    geocodeAddress(geocoder, map, searchAddress);
+                }, false);
+      
+        
       }
-
-      function geocodeAddress(geocoder, resultsMap) {
-        var address = document.getElementById('${place}').value;
-        geocoder.geocode({'${place}': address}, function(results, status) {
+		
+      function geocodeAddress(geocoder, resultsMap, newAddress) {
+    	  console.log(newAddress);
+        geocoder.geocode({'address': newAddress}, function(results, status) {
           if (status === 'OK') {
             resultsMap.setCenter(results[0].geometry.location);
             var marker = new google.maps.Marker({
@@ -111,7 +125,11 @@
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASJj0SjYy3dfJWAm53SUPlIlqOXclJEWk&callback=initMap">
     </script>
- 
+ <div id="map" style="width: 320px; height: 480px;"></div>
+  <div>
+    <input id="searchAddress" type="textbox">
+    <input id="search" type="button" value="Encode" >
+  </div>
  
   </body>
 </html>
