@@ -69,7 +69,7 @@
  <!--  beginning of the bootstrapping -->
  <div class="container">
   <div class="jumbotron">
-  <h1>Bucket List</h1>
+  <h1>Bucket List</h1><h4>These are the places I want to visit before I kick the bucket - to be fair, it could be any day, I do ride a bike to school, in Denver.</h4>
   </div>
  </div> <!-- end of container-flex -->
  <div class="container">
