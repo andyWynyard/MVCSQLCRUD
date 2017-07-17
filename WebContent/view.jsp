@@ -128,7 +128,7 @@
  <div id="map" style="width: 320px; height: 480px;"></div>
   <div>
     <input id="searchAddress" type="textbox">
-    <input id="search" type="button" value="Encode" >
+    <input id="search" type="button" value=Go! >
   </div>
  
   </body>
