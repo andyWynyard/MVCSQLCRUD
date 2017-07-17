@@ -8,40 +8,44 @@
     <meta charset="UTF-8">
     <title>View</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
     <style>
-    table, th, td {
-    border: 1px solid black;
-    /*min-width: 100px;  */
-}
-  #map {
-        height: 600px;
-        width: 400px
-      }
-      
-    </style>
+    textarea {
+    min-width: 100%;
+    } 
  
-    
+    </style>
+
   </head>
   <body>
-  
-    <h1>Bucket List</h1>
+ <!--  beginning of the bootstrapping -->
+ <div class="container">
+  <div class="jumbotron">
+  <h1>Bucket List</h1>
+  </div>
+ </div> <!-- end of container-flex -->
+ <div class="container">
+ 
+    <div class="row">
+   <!--  <div class="col-sm-1 "></div> -->
+    <div class="col-sm-6">
+    <div class="well">
+    
+    
+    
     
        <h3>Input list item here: </h3>
     <form action="name.do" method="POST">
-      <table>
-    <tr>
-        <th>Object to interact with</th>
-        <th>Location</th>
-        <th>Time frame</th>
-    </tr>
-	<tr>
-		<td><input type="text" name="what"/></td> 
-		<td><input type="text" name="where"/></td> 
-		<td><input type="text" name="when"/></td>
-
-	</tr>
-</table>
-  
+     
+       <h5>Object/Person</h5>
+       <input type="text" name="what"/>
+       <h5>Location</h5>
+       <input type="text" name="where"/>
+       <h5>When</h5>
+    		<input type="text" name="when"/>
+    		<br>
+    		<br>
       <input type="submit" value="Submit" name="submit" />
       </form><br>
       
@@ -49,12 +53,12 @@
     
       
    <c:if test="${bucketList != null}">
-   <table style="border:1px solid">
+   <table class="table table-bordered">
     <tr>
     	
-        <th>Object to interact with</th>
+        <th>Object/Person</th>
         <th>Location</th>
-        <th>Time frame</th>
+        <th>When</th>
         <th>Delete</th>
     </tr>
 	<c:forEach items="${bucketList}" var="item">
@@ -69,14 +73,18 @@
     </c:forEach>
     
 </table>
+
 <input type="submit" value="Delete" name="delete" />
 	</c:if>
   </form>
   <c:if test="${removed != null}">
   <p><strong>The Bucket List item: </strong>"${removed}"<strong> was removed.</strong></p>
  </c:if>
- 
- 
+ </div>
+ </div>
+ <div class="col-sm-6">
+ <div class="well">
+ <p>Click the location in the table to the left.</p>
 <!--    <div id="map"></div> -->
     <script>
     function initMap() {
@@ -125,11 +133,19 @@
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASJj0SjYy3dfJWAm53SUPlIlqOXclJEWk&callback=initMap">
     </script>
- <div id="map" style="width: 320px; height: 480px;"></div>
-  <div>
+ <div id="map" style="min-width: 100%; min-height: 400px;"></div> 
     <input id="searchAddress" type="textbox">
     <input id="search" type="button" value=Go! >
-  </div>
- 
+    </div> <!-- end of well div for the map -->
+    </div><!-- end of map col div -->
+    <!-- <div class="col-sm-1"></div> -->
+    
+  </div> 
+ </div>
   </body>
+      <footer class="footer">
+      <div class="container">
+        <span class="text-muted">Copyright &copy 2017 Wynyard Development Inc.</span>
+      </div>
+    </footer>
 </html>
