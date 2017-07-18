@@ -16,7 +16,7 @@
     } 
  
     </style>
-
+<link rel="shortcut icon" href="https://www.shareicon.net/data/128x128/2016/01/18/704925_letter_512x512.png" type="image/x-icon" />
   </head>
   <body>
   
@@ -189,6 +189,16 @@
     
   </div> 
  </div>
+ 
+ 
+ <%-- <iframe
+  width="600"
+  height="450"
+  frameborder="0" style="border:0"
+  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyASJj0SjYy3dfJWAm53SUPlIlqOXclJEWk
+    &q=${item.where}" allowfullscreen>
+</iframe> --%>
+ 
   </body>
       <footer class="footer">
       <div class="container">
