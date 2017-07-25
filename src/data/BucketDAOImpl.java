@@ -17,21 +17,29 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.WebApplicationContext;
 
+
 /**
  * @author andyWynyard
  *
  */
 public class BucketDAOImpl implements BucketDAO {
+
+
+		private static String url = "jdbc:mysql://localhost:3306/bucket_list_db";
+		private String user = "bucketuser";
+		private String pass = "bucketuser";
+
+		public BucketDAOImpl() {
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				System.err.println("Error loading MySQL Driver!!!");
+			}
+		}
 	
-	private static final String FILE_NAME="/WEB-INF/bucket.csv";
-	private List<bucketItem> bucketList = new ArrayList<>();
-	/*
-	 * Use Autowired to have Spring inject an instance
-	 * of a WebApplicationContext into this object after
-	 * creation.  We will use the WebApplicationContext to
-	 * retrieve an ServletContext so we can read from a 
-	 * file.
-	 */
+	
+	
 	@Autowired 
 	private WebApplicationContext wac;
 

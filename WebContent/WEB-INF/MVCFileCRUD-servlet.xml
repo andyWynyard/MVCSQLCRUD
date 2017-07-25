@@ -10,6 +10,6 @@
 
   <context:component-scan base-package="controllers"/>
   <mvc:annotation-driven/>
-  <bean id="dao" class="data.BucketDAOImpl"/>
+  <bean id="BucketDAO" class="data.BucketDAOdbImpl"/>
 
 </beans>

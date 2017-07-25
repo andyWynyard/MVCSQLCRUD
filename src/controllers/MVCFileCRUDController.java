@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import data.BucketDAO;
+import data.BucketDAOdb;
 
 /**
  * @author andyWynyard
@@ -21,13 +21,13 @@ import data.BucketDAO;
 public class MVCFileCRUDController {
 
 	@Autowired
-	private BucketDAO bucketDAO;
+	private BucketDAOdb bucketDAO;
 
 	@RequestMapping(path = "view.do", method = RequestMethod.GET)
 	public ModelAndView welcome() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("view.jsp");
-		mv.addObject("bucketList", bucketDAO.getBucket());
+		mv.addObject("bucketList", bucketDAO.createBucketList());
 		return mv;
 	}
 
