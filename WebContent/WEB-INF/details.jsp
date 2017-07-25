@@ -69,7 +69,7 @@
  <!--  beginning of the bootstrapping -->
  <div class="container">
   <div class="jumbotron">
-  <h1>Bucket List</h1><h4>These are the places I want to visit before I kick the bucket - to be fair, it could be any day, I do ride a bike to school, in Denver.</h4>
+  <h1>Details</h1><h4>Detailed view of the bucket list item.</h4>
   </div>
  </div> <!-- end of container-flex -->
  <div class="container">
@@ -82,11 +82,11 @@
     
     
     
-       <h3>Input list item here: </h3>
-    <form action="name.do" method="POST">
+   
+    <form action="detailedView.do" method="POST">
      
        <h5>Object/Person</h5>
-       <input type="text" name="objectPerson"/>
+       <p>"${bucket.objectPerson}</p>
        <h5>Location</h5>
        <input type="text" name="location"/>
        <h5>When</h5>

@@ -14,6 +14,27 @@ public class Location {
 		this.gps_coords = gps_coords;
 	}
 	
+	
+	
+	
+	public Location(String country_name, String gps_coords, int bucketId) {
+		super();
+		this.country_name = country_name;
+		this.gps_coords = gps_coords;
+		this.bucketId = bucketId;
+	}
+
+
+
+
+	public Location(String country_name, int bucketId) {
+		super();
+		this.country_name = country_name;
+		this.bucketId = bucketId;
+	}
+
+
+
 	public Location() {
 		
 	}
