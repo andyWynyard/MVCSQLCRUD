@@ -79,61 +79,32 @@
     <div class="col-sm-6">
     <div class="well">
     
-    
-    
-    
-   
-    <form action="detailedView.do" method="POST">
-     
-       <h5>Object/Person</h5>
-       <p>"${bucket.objectPerson}</p>
-       <h5>Location</h5>
-       <input type="text" name="location"/>
-       <h5>When</h5>
-    		<input type="text" name="timeFrame"/>
-    		<br>
-    		<br>
-      <input type="submit" value="Submit" name="submit" />
-      </form><br>
+ 
       
     <form action="delete.do" method="POST">
     
       
-   <c:if test="${bucketList != null}">
-   <table class="table table-bordered">
-    <tr>
-    	
-        <th>Object/Person</th>
-       <!--  <th>Location</th> -->
-        <th>When</th>
-      <!--   <th>Delete</th> -->
-    </tr>
-	<c:forEach items="${bucketList}" var="item">
-	<tr>
-		
-		<td>${item.objectPerson}</td> 
-		<%-- <td><a class="submit" id="${item.location}" href="#">${item.location}</a></td>  --%>
-		<td>${item.timeFrame}</td>
-		<%-- <td><input type="checkbox" name="checkDelete" value="${item.objectPerson}" /> --%>
-		
-	        </tr>
-    </c:forEach>
-    
-</table>
+ 
 
-<!-- <input type="submit" value="Delete" name="delete" /> -->
-	</c:if>
+   
+    	
+        <h3>Object/Person</h3>
+     <p>${bucket.objectPerson}</p>
+  <h3>When</h3>
+  <p>${bucket.timeFrame}</p>
+  <h3>Location</h3>
+  <p>${location.countryName}</p>
+	
+
+<input type="submit" value="Delete" name="delete" /> 
+
   </form>
-  <c:if test="${removed != null}">
-  <p><strong>The Bucket List item: </strong>"${removed}"<strong> was removed.</strong></p>
- </c:if>
- </div>
- </div>
- <div class="col-sm-6">
- <div class="well">
- <p>Click the location in the table to the left.</p>
-<!--    <div id="map"></div> -->
-    <script>
+  </div>
+  </div>
+   <div class="col-sm-6">
+    <div class="well">
+  
+  <!--   <script>
     function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 5,
@@ -183,12 +154,21 @@
  <div id="map" style="min-width: 100%; min-height: 400px;"></div> 
     <input id="searchAddress" type="textbox">
     <input id="search" type="button" value=Go! >
+     -->
+     
+     <iframe
+  width="100%"
+  height="450"
+  frameborder="0" style="border:0"
+  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyASJj0SjYy3dfJWAm53SUPlIlqOXclJEWk
+    &q=${location.countryName}" allowfullscreen>
+</iframe>
+    
     </div> <!-- end of well div for the map -->
     </div><!-- end of map col div -->
     <!-- <div class="col-sm-1"></div> -->
     
-  </div> 
- </div>
+ 
  
  
  <%-- <iframe
@@ -196,8 +176,12 @@
   height="450"
   frameborder="0" style="border:0"
   src="https://www.google.com/maps/embed/v1/place?key=AIzaSyASJj0SjYy3dfJWAm53SUPlIlqOXclJEWk
-    &q=${item.where}" allowfullscreen>
+    &q=${location.countryName}" allowfullscreen>
 </iframe> --%>
+ 
+ </div>
+ </div>
+ 
  
   </body>
       <footer class="footer">

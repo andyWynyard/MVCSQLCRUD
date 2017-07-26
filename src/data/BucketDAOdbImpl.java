@@ -93,6 +93,27 @@ public class BucketDAOdbImpl implements BucketDAOdb {
 		System.out.println(picture);
 		return picture;
 	}
+	
+	@Override
+	public Location getLocationByBucketId(int id) {
+		try {
+			Connection conn = DriverManager.getConnection(url, user, pass);
+			String sql = "Select id, country_name, bucket_id FROM location WHERE bucket_id = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+				location = new Location(rs.getInt(1), rs.getString(2), rs.getInt(3));
+			}
+			rs.close();
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println(location);
+		return location;
+	}
 
 	@Override
 	public Bucket addBucket(Bucket bucket) {
@@ -136,7 +157,7 @@ public class BucketDAOdbImpl implements BucketDAOdb {
 			conn.setAutoCommit(false); // Start transaction
 			String sql = "INSERT INTO location (country_name, gps_coords, bucket_id) VALUES (?, ?, ?);";
 			PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			stmt.setString(1, location.getCountry_name());
+			stmt.setString(1, location.getCountryName());
 			stmt.setString(2, location.getGps_coords());
 			stmt.setInt(3, location.getBucketId());
 			int updateCount = stmt.executeUpdate();

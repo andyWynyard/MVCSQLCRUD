@@ -96,9 +96,17 @@
       <input type="submit" value="Submit" name="submit" />
       </form><br>
       
-    <form action="delete.do" method="POST">
-    
-      
+   
+  <c:if test="${removed != null}">
+  <p><strong>The Bucket List item: </strong>"${removed}"<strong> was removed.</strong></p>
+ </c:if>
+ </div>
+ </div>
+ <div class="col-sm-6">
+ <div class="well">
+
+ <form action="details.do" method="GET">
+
    <c:if test="${bucketList != null}">
    <table class="table table-bordered">
     <tr>
@@ -111,10 +119,8 @@
 	<c:forEach items="${bucketList}" var="item">
 	<tr>
 		
-		<td>${item.objectPerson}</td> 
-		<%-- <td><a class="submit" id="${item.location}" href="#">${item.location}</a></td>  --%>
+		<td><a href="details.do?bucketId=${item.id}">${item.objectPerson}</a></td> 
 		<td>${item.timeFrame}</td>
-		<%-- <td><input type="checkbox" name="checkDelete" value="${item.objectPerson}" /> --%>
 		
 	        </tr>
     </c:forEach>
@@ -124,72 +130,6 @@
 <!-- <input type="submit" value="Delete" name="delete" /> -->
 	</c:if>
   </form>
-  <c:if test="${removed != null}">
-  <p><strong>The Bucket List item: </strong>"${removed}"<strong> was removed.</strong></p>
- </c:if>
- </div>
- </div>
- <div class="col-sm-6">
- <div class="well">
- <p>Click the location in the table to the left.</p>
-<!--    <div id="map"></div> -->
-    <script>
-    function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 5,
-          center: {lat: -38.6897432, lng: 175.9049279}
-        });
-        var geocoder = new google.maps.Geocoder();
-        var classname = document.getElementsByClassName('submit');
-        for (var i = 0; i < classname.length; i++) {
-            classname[i].addEventListener('click', function(e) {
-            	
-            
-      	console.log($(e.target).text());
-                geocodeAddress(geocoder, map, $(e.target).text());
-            }, false);
-        }
-        
-        
-        document.getElementById('search').addEventListener('click', function() {
-        	
-            
-        	  var searchAddress = document.getElementById('searchAddress').value;
-        	  console.log(searchAddress);
-                    geocodeAddress(geocoder, map, searchAddress);
-                }, false);
-      
-        
-      }
-		
-      function geocodeAddress(geocoder, resultsMap, newAddress) {
-    	  console.log(newAddress);
-        geocoder.geocode({'address': newAddress}, function(results, status) {
-          if (status === 'OK') {
-            resultsMap.setCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({
-              map: resultsMap,
-              position: results[0].geometry.location
-            });
-          } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-          }
-        });
-      }
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASJj0SjYy3dfJWAm53SUPlIlqOXclJEWk&callback=initMap">
-    </script>
- <div id="map" style="min-width: 100%; min-height: 400px;"></div> 
-    <input id="searchAddress" type="textbox">
-    <input id="search" type="button" value=Go! >
-    </div> <!-- end of well div for the map -->
-    </div><!-- end of map col div -->
-    <!-- <div class="col-sm-1"></div> -->
-    
-  </div> 
- </div>
- 
  
  <%-- <iframe
   width="600"
@@ -198,6 +138,12 @@
   src="https://www.google.com/maps/embed/v1/place?key=AIzaSyASJj0SjYy3dfJWAm53SUPlIlqOXclJEWk
     &q=${item.where}" allowfullscreen>
 </iframe> --%>
+
+
+</div>
+</div>
+</div>
+</div>
  
   </body>
       <footer class="footer">

@@ -3,23 +3,28 @@ package data;
 public class Location {
 	
 	private int id;
-	private String country_name;
+	private String countryName;
 	private String gps_coords;
 	private int bucketId;
 	
-	public Location(int id, String country_name, String gps_coords) {
+	public Location(int id, String countryName, String gps_coords) {
 		super();
 		this.id = id;
-		this.country_name = country_name;
+		this.countryName = countryName;
 		this.gps_coords = gps_coords;
 	}
 	
-	
-	
-	
-	public Location(String country_name, String gps_coords, int bucketId) {
+	public Location(int id, String countryName, int bucketId) {
 		super();
-		this.country_name = country_name;
+		this.id = id;
+		this.countryName = countryName;
+		this.bucketId = bucketId;
+	}
+	
+	
+	public Location(String countryName, String gps_coords, int bucketId) {
+		super();
+		this.countryName = countryName;
 		this.gps_coords = gps_coords;
 		this.bucketId = bucketId;
 	}
@@ -27,9 +32,9 @@ public class Location {
 
 
 
-	public Location(String country_name, int bucketId) {
+	public Location(String countryName, int bucketId) {
 		super();
-		this.country_name = country_name;
+		this.countryName = countryName;
 		this.bucketId = bucketId;
 	}
 
@@ -47,12 +52,12 @@ public class Location {
 		this.id = id;
 	}
 
-	public String getCountry_name() {
-		return country_name;
+	public String getCountryName() {
+		return countryName;
 	}
 
-	public void setCountry_name(String country_name) {
-		this.country_name = country_name;
+	public void setCountryName(String countryName) {
+		this.countryName = countryName;
 	}
 
 	public String getGps_coords() {
@@ -65,7 +70,7 @@ public class Location {
 
 	@Override
 	public String toString() {
-		return "Location [id=" + id + ", country_name=" + country_name + ", gps_coords=" + gps_coords + ", bucketId="
+		return "Location [id=" + id + ", countryName=" + countryName + ", gps_coords=" + gps_coords + ", bucketId="
 				+ bucketId + "]";
 	}
 

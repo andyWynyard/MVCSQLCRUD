@@ -18,4 +18,6 @@ public interface BucketDAOdb {
 
 	List<Bucket> createBucketList();
 
+	Location getLocationByBucketId(int id);
+
 }

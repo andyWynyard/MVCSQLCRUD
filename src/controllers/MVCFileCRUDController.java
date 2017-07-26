@@ -50,7 +50,21 @@ public class MVCFileCRUDController {
 		redir.addFlashAttribute("bucketList", bucketList);
 		return mv;
 	}
-}	
+	
+	@RequestMapping(path = "details.do", params = "bucketId", method = RequestMethod.GET)
+	public ModelAndView detailedView(@RequestParam("bucketId") int bucketId) {
+		System.out.println(bucketId);
+		Bucket bucket = bucketDAO.getBucketById(bucketId);	
+		Location local = bucketDAO.getLocationByBucketId(bucketId);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("details.jsp");
+		mv.addObject("location", local);
+		mv.addObject("bucket", bucket);
+		return mv;
+		
+	}
+	
+
 //	@RequestMapping(path = "delete.do", params = "checkDelete", method = RequestMethod.POST)
 //	public ModelAndView deleteFromCSV(@RequestParam("checkDelete") String value, RedirectAttributes redir) {
 //		System.out.println(value);
@@ -63,4 +77,4 @@ public class MVCFileCRUDController {
 //		return mv;
 //		
 //	}
-//}
+}

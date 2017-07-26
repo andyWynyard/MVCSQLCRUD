@@ -4,6 +4,7 @@ public class Bucket {
 	private int id;
 	private String objectPerson;
 	private String timeFrame;
+	
 
 	public Bucket(int id, String objectPerson, String timeFrame) {
 		super();
